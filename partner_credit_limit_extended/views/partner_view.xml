@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_category_property_form" model="ir.ui.view">
+        <field name="name">partner.over.credit.limit.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='over_credit']" position="after">
+                <div class="o_row" colspan="2">
+                    <field name="check_overdue"/>
+                    <label for="overdue_days" string="Block Overdue days >"/>
+                    <field name="overdue_days" nolabel="1"/>
+                    <label for="overdue_percentage" string="Block Overdue % invoice >"/>
+                    <field name="overdue_percentage" nolabel="1"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
