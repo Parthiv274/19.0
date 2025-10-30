@@ -1,0 +1,12 @@
+<odoo>
+    <record id="view_sale_order_line_inherit_form" model="ir.ui.view">
+        <field name="name">sale.order.line.form.inheirt.logs</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price_subtotal']" position="after">
+                <button name="action_view_update_logs" type="object" string="View Update Logs" icon="fa-history"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,85 @@
+<odoo>
+    <record id="action_sale_order_line_pdf_report" model="ir.actions.report">
+        <field name="name">action_sale_order_line_pdf_report</field>
+        <field name="model">sale.order.line.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">scs_priceList_extended.sale_order_line_pdf_report</field>
+        <field name="report_file">scs_priceList_extended.sale_order_line_pdf_report</field>
+        <!-- <field name="report_name">scs_priceList_extended.sale_order_line_pdf_template</field>
+        <field name="report_file">scs_priceList_extended.sale_order_line_pdf_template</field> -->
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="sale_order_line_pdf_report">
+        <t t-call="web.html_container">
+        <t t-call="web.external_layout"> 
+                <div class="page">
+                    <h2 class="text-center">Sale Order Line Report</h2>
+
+
+                    
+
+                    <t t-foreach="docs" t-as="doc">
+
+                        <!-- <div class="text-center" style="margin-bottom: 15px;">
+                            <p>
+                                <strong><t t-out="doc.company_id.name"/></strong><br/>
+                                <t t-if="doc.company_id.street"><t t-out="doc.company_id.street"/></t>
+                                <t t-if="doc.company_id.street2">, <t t-out="doc.company_id.street2"/></t>
+                                <t t-if="doc.company_id.city">, <t t-out="doc.company_id.city"/></t>
+                                <t t-if="doc.company_id.state_id">, <t t-out="doc.company_id.state_id.name"/></t>
+                                <t t-if="doc.company_id.zip"> - <t t-out="doc.company_id.zip"/></t><br/>
+                                <t t-if="doc.company_id.phone">📞 <t t-out="doc.company_id.phone"/></t>
+                                <t t-if="doc.company_id.email"> | ✉️ <t t-out="doc.company_id.email"/></t>
+                            </p>
+                        </div> -->
+                        <p><strong>Company:</strong> <t t-out="doc.company_id.name"/></p>
+                        <p><strong>From:</strong> <t t-out="doc.start_date"/> 
+                        <strong>To:</strong> <t t-out="doc.end_date"/></p>
+
+                        <table class="table table-sm o_main_table" style="width:100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>Sale Order</th>
+                                    <th>Order Line</th>
+                                    <th>Product</th>
+                                    <th>Field Changed</th>
+                                    <th>Old Value</th>
+                                    <th>New Value</th>
+                                    <th>Changed By</th>
+                                    <th>Change Date</th>
+                                    <th>Company</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="domain" t-value="[
+                                    ('change_date', '&gt;=', doc.start_date),
+                                    ('change_date', '&lt;=', doc.end_date),
+                                    ('sale_order_id.company_id', '=', doc.company_id.id)
+                                ]"/>
+
+                                <t t-if="doc.sale_order_ids">
+                                    <t t-set="domain" t-value="domain + [('sale_order_id', 'in', doc.sale_order_ids.ids)]"/>
+                                </t>
+
+                                <t t-foreach="env['sale.order.line.update.log'].search(domain)" t-as="log">
+                                    <tr>
+                                        <td><t t-out="log.sale_order_id.name"/></td>
+                                        <td><t t-out="log.sale_order_line_id.display_name"/></td>
+                                        <td><t t-out="log.product_id.display_name"/></td>
+                                        <td><t t-out="log.Value_changed"/></td>
+                                        <td><t t-out="log.old_value"/></td>
+                                        <td><t t-out="log.new_value"/></td>
+                                        <td><t t-out="log.changed_by.name"/></td>
+                                        <td><t t-out="log.change_date"/></td>
+                                        <td><t t-out="log.sale_order_id.company_id.name"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

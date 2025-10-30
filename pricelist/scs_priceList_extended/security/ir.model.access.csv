@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pricelist_update_log,access.pricelist.update.log,model_pricelist_update_log,base.group_user,1,0,0,0
+access_pricelist_update_log_admin,access.pricelist.update.log.admin,model_pricelist_update_log,,1,1,1,1
+access_report_update_wizard,access.report.update.wizard,model_report_update_wizard,,1,1,1,1
+access_sale_order_line_update_log_user,sale.order.line.update.log,model_sale_order_line_update_log,base.group_user,1,0,0,0
+access_sale_order_line_update_log_manager,sale.order.line.update.log,model_sale_order_line_update_log,,1,1,1,1
+access_sale_order_line_report_wizard,sale.order.line.report.wizard,model_sale_order_line_report_wizard,,1,1,1,1

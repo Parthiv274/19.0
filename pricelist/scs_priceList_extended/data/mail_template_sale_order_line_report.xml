@@ -1,0 +1,56 @@
+
+
+<!-- <odoo>
+    <data>
+        <record id="mail_template_sale_order_line_test" model="mail.template">
+            <field name="name">Sale Order Test Mail</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Test Email - Hello</field> -->
+            <!-- <field name="email_from">noreply@yourcompany.com</field> -->
+            <!-- <field name="email_to"></field> 
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hello,</p>
+                    <p>This is a test email sent to responsible users.</p> -->
+                    <!-- <p>Company: <t t-esc="object.company_id.name"/></p>
+                    <p>Date Range: <t t-esc="object.start_date"/> to <t t-esc="object.end_date"/></p> -->
+                <!-- </div>
+            </field>
+        </record>
+    </data>
+</odoo> -->
+
+
+
+<!-- <odoo>
+    <data>
+        <record id="mail_template_sale_order_line_report_responsibles" model="mail.template">
+            <field name="name">Sale Order Line Report - Responsibles</field>
+            <field name="model_id" ref="model_sale_order_line_report_wizard"/>
+            <field name="subject">Sale Order Line Report -{object.start_date} to {object.end_date}</field>
+            <field name="email_from">{(user.email or 'noreply@yourcompany.com')|safe}</field>
+            <field name="body_html">
+                <p>Hello,</p>
+                <p>Please find attached the sale order line report for <t t-esc="object.start_date"/> to <t t-esc="object.end_date"/></p>
+                <p>Regards,<br/>{(user.name or '')}</p>
+            </field>
+        </record>
+    </data>
+</odoo> -->
+
+
+<odoo>
+    <record id="mail_template_sale_order_line_report_responsibles" model="mail.template">
+        <field name="name">Sale Order Line Report - Responsibles</field>
+        <field name="model_id" ref="model_sale_order_line_report_wizard"/>
+        <field name="subject">Sale Order Line Report-{object.start_date} to {object.end_date}</field>
+        <field name="email_from">{{user.email or 'noreply@yourcompany.com'}}</field>
+        <field name="body_html" type="html">
+            <p>Hello,</p>
+            <p>Please find attached the sale order line report for {object.start_date} to {object.end_date}</p>
+            <p>Regards{object.user.name}</p>
+        </field>
+    </record>
+</odoo>
+
+
